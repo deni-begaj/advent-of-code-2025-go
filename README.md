@@ -2,8 +2,7 @@
 
 ## Requirements
 
-- Install GoLang
-
+- Install Go from https://go.dev/doc/install
 
 ## Execute
 
