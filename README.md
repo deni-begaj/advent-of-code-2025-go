@@ -2,8 +2,8 @@
 
 ## Requirements
 
-- Install Go from https://go.dev/doc/install
+- Install Go from [official page](https://go.dev/doc/install)
 
 ## Execute
 
-
+Run `go day1`
