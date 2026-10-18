@@ -2,7 +2,6 @@ package day1
 
 import (
 	"fmt"
-	"math"
 	"strconv"
 	"strings"
 )
@@ -17,27 +16,13 @@ const (
 )
 
 func finiteOp(num int16, op Dir, amount int16) int16 {
-	if amount > Max {
-		amount = amount % Max
-	}
-	if op == Left {
-		diff := num - amount
-		if diff < 0 {
-			return Max - int16(math.Abs(float64(diff)))
-		} else {
-			return diff
-		}
-	} else if op == Right {
-		sum := num + amount
-		remainderToEnd := Max - num
-		if amount > remainderToEnd {
-			return amount - remainderToEnd
-		} else if sum == Max {
-			return 0
-		} else {
-			return sum
-		}
-	} else {
+	amount = amount % Max
+	switch op {
+	case Left:
+		return (num - amount + Max) % Max
+	case Right:
+		return (num + amount) % Max
+	default:
 		return num
 	}
 }
@@ -45,18 +30,22 @@ func finiteOp(num int16, op Dir, amount int16) int16 {
 func Day1() {
 	fmt.Println("Hello from day1")
 
-	otherInput := `L60
-R10
+	otherInput := `L68
+L30
+R48
+L5
 R60
-L60
-R250`
+L55
+L1
+L99
+R14
+L82`
 	fmt.Println(otherInput)
 	inputSlice := strings.Split(Input, "\n")
 	var head int16 = 50
-	var zeroHit int16 = 0
+	var zeros int16 = 0
 	for i := range inputSlice {
 		elem := inputSlice[i]
-		fmt.Println("Elem", elem)
 		if elem == "" {
 			continue
 		}
@@ -68,8 +57,8 @@ R250`
 		}
 		head = int16(finiteOp(head, dir, int16(count)))
 		if head == 0 {
-			zeroHit += 1
+			zeros += 1
 		}
-		fmt.Println("Head is:", head, "| Zero counts:", zeroHit)
+		fmt.Println("Head is:", head, "| Zero counts:", zeros)
 	}
 }
